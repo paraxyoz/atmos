@@ -35,8 +35,21 @@ fn position_near_tray(window: &WebviewWindow) {
     let mon_w = mon_size.width as f64;
     let mon_h = mon_size.height as f64;
 
-    let x = (mon_x + mon_w - win_w - (16.0 * scale)).round() as i32;
-    let y = (mon_y + mon_h - win_h - (60.0 * scale)).round() as i32;
+    #[cfg(target_os = "macos")]
+    let (x, y) = {
+      // macOS: Top-right right under menu bar / status bar icons
+      let x = (mon_x + mon_w - win_w - (16.0 * scale)).round() as i32;
+      let y = (mon_y + (32.0 * scale)).round() as i32;
+      (x, y)
+    };
+
+    #[cfg(not(target_os = "macos"))]
+    let (x, y) = {
+      // Windows/Linux: Bottom-right near tray
+      let x = (mon_x + mon_w - win_w - (16.0 * scale)).round() as i32;
+      let y = (mon_y + mon_h - win_h - (60.0 * scale)).round() as i32;
+      (x, y)
+    };
 
     let _ = window.set_position(Position::Physical(PhysicalPosition { x, y }));
   }
@@ -60,6 +73,15 @@ fn set_window_vibrancy(window: WebviewWindow, theme: String) {
       let _ = clear_blur(&window);
     }
   }
+  #[cfg(target_os = "macos")]
+  {
+    use window_vibrancy::{apply_vibrancy, clear_vibrancy, NSVisualEffectMaterial};
+    if theme == "acrylic" {
+      let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, Some(14.0));
+    } else {
+      let _ = clear_vibrancy(&window);
+    }
+  }
 }
 
 #[tauri::command]
@@ -73,6 +95,11 @@ pub fn run() {
     .invoke_handler(tauri::generate_handler![hide_window, set_window_vibrancy, exit_app])
     .setup(|app| {
       app.manage(AppTrayState::default());
+
+      #[cfg(target_os = "macos")]
+      {
+        let _ = app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+      }
 
       if cfg!(debug_assertions) {
         let _ = app.handle().plugin(
@@ -93,6 +120,13 @@ pub fn run() {
 
       if let Some(window) = app.get_webview_window("main") {
         let _ = window.set_icon(win_icon);
+
+        #[cfg(target_os = "macos")]
+        {
+          use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
+          let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, Some(14.0));
+        }
+
         #[cfg(target_os = "windows")]
         {
           use window_vibrancy::{apply_acrylic, apply_blur};

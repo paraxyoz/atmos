@@ -1,4 +1,4 @@
-# 🎧 Atmos — Ambient Sound Generator for Windows
+# 🎧 Atmos — Ambient Sound Generator (Windows & macOS)
 
 <p align="center">
   <img src="src-tauri/icons/128x128.png" alt="Atmos Logo" width="96" height="96" />
@@ -6,11 +6,12 @@
 
 <p align="center">
   <b>Минималистичный генератор фоновых звуков и шумов для концентрации, релаксации и сна.</b><br>
-  Работает прямо из системного трея Windows. 100% автономно, без интернета и рекламы.
+  Работает прямо из системного трея Windows или Menu Bar macOS. 100% автономно, без интернета и рекламы.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-0078D6?style=flat-square&logo=windows" alt="Platform: Windows" />
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS-0078D6?style=flat-square&logo=windows&logoColor=white" alt="Platform" />
+  <img src="https://img.shields.io/badge/macOS-Apple%20Silicon%20%26%20Intel-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS Support" />
   <img src="https://img.shields.io/badge/Framework-Tauri%20v2-24C8D8?style=flat-square&logo=tauri" alt="Tauri v2" />
   <img src="https://img.shields.io/badge/Frontend-React%2018%20%2B%20TypeScript-3178C6?style=flat-square&logo=typescript" alt="React + TS" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License: MIT" />
@@ -38,9 +39,10 @@
   - Прокрутка над дорожкой регулирует громкость конкретного трека.
   - Прокрутка над общей панелью или фоном виджета регулирует мастер-громкость.
 
-- 🎨 **Премиальный интерфейс Windows 11:**
-  - Нативное системное скругление углов DWM (*DWMWCP_ROUND*).
-  - Поддержка двух стилей: **Размытие (Windows Acrylic / Frosted Glass)** и **Классическая темная тема**.
+- 🎨 **Нативный кроссплатформенный интерфейс:**
+  - **Windows 11**: Нативное системное скругление углов DWM (*DWMWCP_ROUND*) и Windows Acrylic glassmorphism.
+  - **macOS**: Нативное размытие матового стекла (*NSVisualEffectMaterial::HudWindow*), размещение в строке меню (Menu Bar Status Item) и скрытие из Dock (Accessory App).
+  - Поддержка двух тем: **Размытие (Frosted Glass)** и **Классическая темная тема**.
   - 4 гармоничные цветовые схемы: Янтарный, Мятный, Лазурный, Розовый.
   - Живая пульсация активных звуков и визуализатор эквалайзера.
 
@@ -55,25 +57,23 @@
 - 🛡 **Безопасность слуха:**
   - Стартовая мастер-громкость выставлена на комфортные 40% без риска оглушения.
 
-- 📌 **Удобство трея:**
-  - Кнопка `<` (chevron) сворачивает окно в системный трей Windows.
+- 📌 **Удобство трея / меню-бара:**
+  - Кнопка `<` (chevron) сворачивает окно в системный трей (Windows) или Menu Bar (macOS).
   - Красная кнопка `✕` полностью завершает процесс приложения.
-  - Контекстное меню иконки в трее с быстрым доступом.
+  - Контекстное меню иконки с быстрым доступом.
 
 ---
 
 ## 🚀 Установка
 
-### Вариант 1: Установщик (Рекомендуется)
-1. Скачайте **`Atmos_Setup_v0.1.0.exe`** из раздела [**Releases**](../../releases/latest).
-2. Запустите инсталлятор:
-   - Выберите язык установки (Русский / English).
-   - Выберите тип установки (Для текущего пользователя или Для всех).
-   - При необходимости укажите свою папку для установки или оставьте папку по умолчанию.
-3. Инсталлятор создаст ярлык на рабочем столе и в меню «Пуск».
+### Для macOS (.dmg)
+1. Скачайте **`Atmos.dmg`** из раздела [**Releases**](../../releases/latest).
+2. Откройте DMG-образ и перетащите иконку **Atmos** в папку **Applications** («Программы»).
+3. Приложение появится в верхней строке меню (Menu Bar) и готово к использованию на **Apple Silicon (M1/M2/M3/M4)** и **Intel Mac**.
 
-### Вариант 2: Портативная версия
-Скачайте **`Atmos_Portable_v0.1.0.exe`** из раздела [**Releases**](../../releases/latest) и запускайте из любой папки или с флешки без установки.
+### Для Windows (.exe)
+- **Установщик (Рекомендуется)**: Скачайте **`Atmos_Setup_v0.1.0.exe`** — мастер установки с выбором папки и созданием ярлыков.
+- **Портативная версия**: Скачайте **`Atmos_Portable_v0.1.0.exe`** — запускается без установки.
 
 ---
 
