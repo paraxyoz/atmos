@@ -46,12 +46,25 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: 'Atmos ${{ github.ref_name }}'
+          tagName: v0.1.0
+          releaseName: 'Atmos v0.1.0'
           releaseBody: 'Кросс-платформенный релиз Atmos для Windows и macOS'
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.os == 'macos-latest' && '--target universal-apple-darwin' || '' }}
+
+      - name: Upload macOS DMG to existing release v0.1.0
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for file in src-tauri/target/**/bundle/dmg/*.dmg; do
+            if [ -f "$file" ]; then
+              echo "Uploading $file to release v0.1.0..."
+              gh release upload v0.1.0 "$file" --clobber || true
+            fi
+          done
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
