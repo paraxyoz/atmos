@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    background: transparent !important;
+  }
+}
+
+/* Custom scrollbar reset */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tactile Pill Thumb Knob */
+.thumb-knob {
+  width: 26px !important;
+  height: 12px !important;
+  border-radius: 9999px !important;
+  margin: 0 !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.4) inset !important;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px !important;
+  height: 12px !important;
+  border-radius: 9999px !important;
+  background: #f1f3f7;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.45);
+  cursor: pointer;
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 26px !important;
+  height: 12px !important;
+  border-radius: 9999px !important;
+  background: #f1f3f7;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.45);
+  cursor: pointer;
+  border: none;
+}
+
+/* --- Animated Equalizer bars --- */
+@keyframes eq-bounce-1 {
+  0%, 100% { height: 3px; }
+  50% { height: 11px; }
+}
+@keyframes eq-bounce-2 {
+  0%, 100% { height: 9px; }
+  50% { height: 4px; }
+}
+@keyframes eq-bounce-3 {
+  0%, 100% { height: 4px; }
+  50% { height: 12px; }
+}
+@keyframes eq-bounce-4 {
+  0%, 100% { height: 10px; }
+  50% { height: 5px; }
+}
+
+.eq-bar-1 {
+  animation: eq-bounce-1 0.85s ease-in-out infinite;
+}
+.eq-bar-2 {
+  animation: eq-bounce-2 0.65s ease-in-out infinite 0.15s;
+}
+.eq-bar-3 {
+  animation: eq-bounce-3 0.75s ease-in-out infinite 0.3s;
+}
+.eq-bar-4 {
+  animation: eq-bounce-4 0.9s ease-in-out infinite 0.1s;
+}
+
+/* Play/Pause subtle breath effect */
+@keyframes play-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 6px currentColor); }
+}
+
+.btn-play-pulse {
+  animation: play-pulse 3s ease-in-out infinite;
+}
+
+/* Active icon breathing glow */
+@keyframes icon-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px -2px var(--accent-glow, rgba(226, 196, 153, 0.4));
+  }
+  50% {
+    box-shadow: 0 0 16px 2px var(--accent-glow, rgba(226, 196, 153, 0.6));
+  }
+}
+
+.icon-glow-active {
+  animation: icon-glow 2.4s ease-in-out infinite;
+}
+

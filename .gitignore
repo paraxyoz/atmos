@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build outputs
+dist/
+build/
+
+# Tauri & Rust build artifacts
+src-tauri/target/
+src-tauri/gen/
+
+# Environment and sensitive tokens
+.env
+.env.local
+.env.*.local
+.gh_token
+
+# Logs and system files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

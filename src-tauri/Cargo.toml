@@ -1,0 +1,22 @@
+[package]
+name = "atmos"
+version = "0.1.0"
+description = "Atmos Background Sound Generator"
+authors = ["Atmos Team"]
+license = "MIT"
+edition = "2021"
+
+[lib]
+name = "atmos_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2", features = ["tray-icon", "image-png", "image-ico"] }
+tauri-plugin-log = "2"
+window-vibrancy = "0.8.1"
